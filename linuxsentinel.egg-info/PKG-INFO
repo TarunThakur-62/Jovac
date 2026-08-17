@@ -1,0 +1,6 @@
+Metadata-Version: 2.4
+Name: linuxsentinel
+Version: 1.0.0
+Summary: Linux Security Audit Tool
+Requires-Python: >=3.10
+Requires-Dist: Jinja2>=3.1.0

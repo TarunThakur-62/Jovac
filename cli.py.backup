@@ -1,0 +1,266 @@
+import argparse
+import os
+import subprocess
+import sys
+
+from config import APP_NAME, VERSION
+
+
+def show_banner():
+    os.system("clear")
+
+    try:
+        from pyfiglet import figlet_format
+
+        print("\033[1;36m")
+        print(figlet_format("LINUX", font="slant"))
+        print(figlet_format("SENTINEL", font="slant"))
+        print("\033[0m")
+
+    except ImportError:
+        print("\033[1;36m")
+        print("==========================================")
+        print("              LINUX SENTINEL")
+        print("==========================================")
+        print("\033[0m")
+
+    print("Linux Security Audit Tool")
+    print(f"Version: {VERSION}")
+    print("=" * 60)
+
+
+def pause():
+    input("\nPress ENTER to return to menu...")
+
+
+def menu():
+    while True:
+
+        show_banner()
+
+        print("""
+Select Security Audit
+
+ [1] Full Security Audit
+ [2] File Permissions
+ [3] SUID / SGID
+ [4] User Accounts
+ [5] Running Services
+ [6] Network Security
+ [7] Firewall
+ [8] SSH Security
+ [9] Cron Jobs
+ [10] System Security
+
+ [0] Exit
+""")
+
+        choice = input("Enter your choice: ").strip()
+
+        if choice == "1":
+            full_audit()
+
+        elif choice == "2":
+            permission_audit()
+
+        elif choice == "3":
+            suid_sgid_audit()
+
+        elif choice == "4":
+            user_audit()
+
+        elif choice == "5":
+            service_audit()
+
+        elif choice == "6":
+            network_audit()
+
+        elif choice == "7":
+            firewall_audit()
+
+        elif choice == "8":
+            ssh_audit()
+
+        elif choice == "9":
+            cron_audit()
+
+        elif choice == "10":
+            system_audit()
+
+        elif choice == "0":
+            print("\nExiting LinuxSentinel...")
+            break
+
+        else:
+            print("\n[!] Invalid choice")
+            pause()
+
+
+def full_audit():
+    show_banner()
+
+    print("[INFO] Starting Full Security Audit")
+    print("=" * 60)
+
+    from main import main
+    main()
+
+    pause()
+
+
+def permission_audit():
+    show_banner()
+
+    print("[*] Starting File Permission Audit...")
+    print("=" * 60)
+
+    from auditors.permissions import audit_permissions
+    audit_permissions()
+
+    pause()
+
+
+def suid_sgid_audit():
+    show_banner()
+
+    print("[*] Starting SUID / SGID Audit...")
+    print("=" * 60)
+
+    from auditors.suid_sgid import audit_suid_sgid
+    audit_suid_sgid()
+
+    pause()
+
+
+def user_audit():
+    show_banner()
+
+    print("[*] Starting User Account Audit...")
+    print("=" * 60)
+
+    from auditors.users import audit_users
+    audit_users()
+
+    pause()
+
+
+def service_audit():
+    show_banner()
+
+    print("[*] Starting Service Audit...")
+    print("=" * 60)
+
+    from auditors.services import audit_services
+    audit_services()
+
+    pause()
+
+
+def network_audit():
+    show_banner()
+
+    print("[*] Starting Network Security Audit...")
+    print("=" * 60)
+
+    from auditors.network import audit_network
+    audit_network()
+
+    pause()
+
+
+def firewall_audit():
+    show_banner()
+
+    print("[*] Starting Firewall Audit...")
+    print("=" * 60)
+
+    from auditors.firewall import audit_firewall
+    audit_firewall()
+
+    pause()
+
+
+def ssh_audit():
+    show_banner()
+
+    print("[*] Starting SSH Security Audit...")
+    print("=" * 60)
+
+    from auditors.ssh import audit_ssh
+    audit_ssh()
+
+    pause()
+
+
+def cron_audit():
+    show_banner()
+
+    print("[*] Starting Cron Security Audit...")
+    print("=" * 60)
+
+    from auditors.cron import audit_cron
+    audit_cron()
+
+    pause()
+
+
+def system_audit():
+    show_banner()
+
+    print("[*] Starting System Security Audit...")
+    print("=" * 60)
+
+    from auditors.system import audit_system
+    audit_system()
+
+    pause()
+
+
+def open_scan_terminal():
+    env = os.environ.copy()
+    env["LINUXSENTINEL_CHILD"] = "1"
+
+    subprocess.Popen(
+        [
+            "xfce4-terminal",
+            "--title=LinuxSentinel Security Audit",
+            "--maximize",
+            "--",
+            sys.executable,
+            os.path.abspath(__file__),
+            "scan"
+        ],
+        env=env
+    )
+
+
+def cli():
+
+    parser = argparse.ArgumentParser(
+        prog="linuxsentinel",
+        description="Linux Security Audit Tool"
+    )
+
+    parser.add_argument(
+        "command",
+        choices=["scan", "version"],
+        help="Command to execute"
+    )
+
+    args = parser.parse_args()
+
+    if args.command == "version":
+        print(f"{APP_NAME} v{VERSION}")
+        return
+
+    if args.command == "scan":
+
+        if os.environ.get("LINUXSENTINEL_CHILD") != "1":
+            open_scan_terminal()
+            return
+
+        menu()
+
+
+if __name__ == "__main__":
+    cli()
