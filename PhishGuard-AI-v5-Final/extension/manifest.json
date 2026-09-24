@@ -1,0 +1,13 @@
+{
+  "manifest_version": 3,
+  "name": "PhishGuard-AI Scanner",
+  "version": "5.0",
+  "description": "Defensive phishing URL risk scanner",
+  "permissions": [
+    "activeTab",
+    "storage"
+  ],
+  "action": {
+    "default_popup": "popup.html"
+  }
+}

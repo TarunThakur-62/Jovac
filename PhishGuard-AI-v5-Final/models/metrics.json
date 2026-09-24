@@ -1,0 +1,26 @@
+{
+  "accuracy": 1.0,
+  "precision": 1.0,
+  "recall": 1.0,
+  "f1": 1.0,
+  "features": [
+    "url_length",
+    "host_length",
+    "dot_count",
+    "hyphen_count",
+    "digit_count",
+    "subdomain_count",
+    "has_https",
+    "has_ip",
+    "at_symbol",
+    "keyword_count",
+    "path_length",
+    "query_length",
+    "hostname_entropy",
+    "punycode",
+    "double_slash_path",
+    "port_present",
+    "fragment_length"
+  ],
+  "dataset_note": "Baseline synthetic training unless a validated CSV is supplied."
+}

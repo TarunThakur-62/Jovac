@@ -1,0 +1,41 @@
+{
+  "paypal": [
+    "paypal.com"
+  ],
+  "google": [
+    "google.com",
+    "google.co.in"
+  ],
+  "microsoft": [
+    "microsoft.com",
+    "live.com",
+    "office.com"
+  ],
+  "apple": [
+    "apple.com",
+    "icloud.com"
+  ],
+  "amazon": [
+    "amazon.com",
+    "amazon.in"
+  ],
+  "facebook": [
+    "facebook.com"
+  ],
+  "instagram": [
+    "instagram.com"
+  ],
+  "netflix": [
+    "netflix.com"
+  ],
+  "sbi": [
+    "sbi.co.in",
+    "onlinesbi.sbi"
+  ],
+  "hdfc": [
+    "hdfcbank.com"
+  ],
+  "icici": [
+    "icicibank.com"
+  ]
+}
